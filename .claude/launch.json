@@ -1,0 +1,6 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    { "name": "ponte", "runtimeExecutable": "npm", "runtimeArgs": ["run", "start", "--", "-p", "3101"], "cwd": "/home/luca/code/alpwise/trattoria-del-ponte", "port": 3101 }
+  ]
+}
