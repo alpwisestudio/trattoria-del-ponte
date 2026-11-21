@@ -233,8 +233,8 @@ export const EVENT_MENUS = [
   {
     name: "Menù cerimonie",
     price: "€ 35",
-    note: "Battesimi, comunioni, cresime · personalizzabile",
-    items: ["Insalata di mare, affettati e gnocchi fritti", "Spaghetti ai frutti di mare e risotto ai porcini", "Fritto misto di pesce con patatine"],
+    note: "Battesimi, cresime, banchetti ed eventi · personalizzabile",
+    items: ["Insalata di mare, affettato, gnocchi fritti e bruschette", "Spaghetti ai frutti di mare e risotto ai porcini", "Fritto misto di pesce con patatine"],
   },
   {
     name: "Apericena",
