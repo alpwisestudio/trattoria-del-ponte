@@ -14,9 +14,9 @@ export const metadata: Metadata = {
 };
 
 const STEPS = [
-    { t: "Almeno 6 antipasti", d: "Insalata di mare, polpo e patate, pepata di cozze, marinati, gratinati." },
-    { t: "Due primi", d: "Paccheri, spaghetti e risotti ai frutti di mare, preparati al momento." },
-    { t: "Due secondi", d: "Fritto misto, grigliata e i piatti del giorno secondo il mercato." },
+    { t: "Almeno 6 antipasti", d: "Si comincia con un giro di antipasti di pesce, almeno sei." },
+    { t: "Due primi", d: "Poi arrivano due primi di pesce." },
+    { t: "Due secondi", d: "E due secondi di pesce." },
     { t: "Finché non dici basta", d: "Le portate continuano fino allo stop del tavolo." },
 ];
 
@@ -64,7 +64,7 @@ export default function GiroPage() {
 
             <section className="bg-ink py-24 text-white md:py-28">
                 <Container>
-                    <Heading light kicker="Quattro formule" title="Scegli il tuo giro" text="Tutti i prezzi sono a persona, bevande escluse." />
+                    <Heading light kicker="Quattro formule" title="Scegli il tuo giro" text="Prezzi a persona, minimo 4 persone." />
                     <GiroTable />
                 </Container>
             </section>
@@ -77,7 +77,7 @@ export default function GiroPage() {
                     alt="Piatto di pesce con branzino, capesante e gamberi"
                 >
                     <p>
-                        Ostriche, scampi, gamberi rossi di Mazara e bis di tartare. Con il Diamond si chiude con i paccheri
+                        Ostriche, scampi, gamberi rossi di Mazara e bis di tartare. Con il Diamond arrivano anche i paccheri
                         all&apos;astice.
                     </p>
                 </Feature>

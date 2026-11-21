@@ -166,7 +166,7 @@ export const MENU: MenuCategory[] = [
       { name: "Marinara", desc: "Doppio pomodoro, origano, aglio", price: "€ 6,50" },
       { name: "Diavola", desc: "Pomodoro, mozzarella, salame piccante", price: "€ 8,50" },
       { name: "Napoli", desc: "Pomodoro, mozzarella, origano, acciughe", price: "€ 8,50" },
-      { name: "Capricciosa", desc: "Pomodoro, mozzarella, cotto, funghi, carciofi, olive, acciughe", price: "€ 9,50" },
+      { name: "Capricciosa", desc: "Pomodoro, mozzarella, cotto, funghi, carciofi, olive, acciughe, origano", price: "€ 9,50" },
       { name: "Quattro stagioni", desc: "Pomodoro, mozzarella, cotto, funghi, carciofi, olive", price: "€ 9" },
       { name: "Cinque formaggi", desc: "Mozzarella, zola, taleggio, fontina, grana", price: "€ 9,50" },
       { name: "Bufala", desc: "Pomodoro, mozzarella di bufala", price: "€ 10,50" },
@@ -176,9 +176,9 @@ export const MENU: MenuCategory[] = [
   },
   {
     id: "pizze-casa",
-    title: "Pizze della casa",
-    short: "Pizze della casa",
-    note: "Le creazioni del Ponte",
+    title: "Pizze speciali",
+    short: "Pizze speciali",
+    note: "Con pesce, salumi e formaggi",
     items: [
       { name: "Frutti di mare", desc: "Pomodoro, mozzarella, cozze, vongole, calamari, gamberi", price: "€ 12" },
       { name: "Focaccia con carpaccio di salmone", desc: "Rucola, pomodorini e pistacchi", price: "€ 12" },
@@ -209,7 +209,7 @@ export const MENU: MenuCategory[] = [
       { name: "Falanghina, Fiano, Greco di Tufo", desc: "San Gregorio DOCG", price: "€ 25" },
       { name: "Vermentino di Gallura", price: "€ 25" },
       { name: "Prosecco di Valdobbiadene millesimato", price: "da € 18" },
-      { name: "Rossi della casa", desc: "Nero d'Avola, Montepulciano, Chianti, Bonarda, Barbera", price: "da € 15" },
+      { name: "Rossi in bottiglia", desc: "Nero d'Avola, Montepulciano, Chianti, Bonarda, Barbera", price: "da € 15" },
       { name: "Vino frizzante alla spina", desc: "Bianco o rosso, al litro", price: "€ 12" },
     ],
   },
@@ -218,7 +218,7 @@ export const MENU: MenuCategory[] = [
 /** Giro pesce: portate a volontà fino allo stop, minimo 4 persone. */
 export const GIRO = [
   { name: "Basic", price: "40", text: "Almeno 6 antipasti, 2 primi e 2 secondi di pesce, finché non dici basta." },
-  { name: "Gold", price: "45", text: "Il Basic più un primo a scelta: spaghetti 3 orgasmi, risotto alla pescatora o gamberi di Mazara e pistacchio." },
+  { name: "Gold", price: "45", text: "Il Basic più un primo a scelta: spaghetti 3 orgasmi, risotto alla pescatora o spaghetti con gamberi di Mazara e pistacchio." },
   { name: "Platinum", price: "50", text: "Il Basic più una crudité di pesce.", highlight: true },
   { name: "Diamond", price: "60", text: "Il Basic con crudité di pesce e paccheri all'astice." },
 ];
@@ -227,8 +227,8 @@ export const EVENT_MENUS = [
   {
     name: "Cena aziendale",
     price: "da € 30",
-    note: "Minimo 20 persone · menù da € 30, € 35 e € 40",
-    items: ["Antipasti di mare e di terra", "Risotto e paccheri ai frutti di mare", "Fritto misto o gamberoni alla griglia"],
+    note: "Minimo 20 persone · bevande escluse · anche da € 35 e € 40",
+    items: ["Margherita, affettati misti, gnocco fritto e pepata di cozze", "Risotto ai porcini e paccheri con gamberi e olive", "Fritto misto di pesce con patatine"],
   },
   {
     name: "Menù cerimonie",

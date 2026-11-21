@@ -181,7 +181,7 @@ export function EventForm() {
             </label>
             <label className="sm:col-span-2">
                 <Label required>Numero di ospiti</Label>
-                <input name="guests" type="number" min={10} max={50} required placeholder="Fino a 50" className={field} />
+                <input name="guests" type="number" min={1} max={50} required placeholder="Fino a 50" className={field} />
             </label>
             <label className="sm:col-span-2">
                 <Label>Note</Label>

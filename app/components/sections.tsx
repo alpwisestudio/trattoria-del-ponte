@@ -60,7 +60,6 @@ export function GiroTable() {
                 >
                     <div role="rowheader">
                         <span className="deco text-2xl !font-normal tracking-[0.08em]">{g.name}</span>
-                        {g.highlight && <span className="kicker mt-2 block !text-[0.65rem] text-ice">Il più scelto</span>}
                     </div>
                     <span role="cell" className="font-display text-3xl font-light tabular-nums md:text-4xl">
                         € {g.price}
@@ -87,7 +86,7 @@ export function BookingSection() {
                         <h2 className="deco mt-4 text-4xl leading-[1.05] md:text-5xl">Prenota il tuo tavolo</h2>
                         <p className="mt-5 leading-relaxed text-muted">
                             Scegli giorno, servizio e numero di persone: la richiesta ci arriva su WhatsApp e ti confermiamo il
-                            tavolo in pochi minuti. Nel weekend i posti finiscono presto.
+                            tavolo. Nel weekend i posti finiscono presto.
                         </p>
                     </div>
                     <div data-reveal style={delay(1)} className="mt-10">

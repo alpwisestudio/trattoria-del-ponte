@@ -110,7 +110,7 @@ export default function Home() {
                                 <br />e forno a legna
                             </>
                         }
-                        text="Il pesce arriva fresco ogni mattina e cambia con il mercato. Accanto, i classici di carne e una pizzeria vera."
+                        text="Il pesce arriva fresco ogni giorno e cambia con il mercato. Accanto, i classici di carne e la pizzeria con forno a legna."
                     />
                     <ul>
                         {KITCHENS.map((k, i) => (
@@ -157,7 +157,7 @@ export default function Home() {
                         light
                         kicker="La specialità della casa"
                         title="Il giro pesce"
-                        text="Portate di pesce a volontà, preparate al momento, fino allo stop del tavolo. Minimo 4 persone."
+                        text="Portate di pesce a volontà, fino allo stop del tavolo. Minimo 4 persone."
                     />
                     <GiroTable />
                     <div data-reveal className="mt-12 flex flex-col gap-3 sm:flex-row">
@@ -181,7 +181,7 @@ export default function Home() {
                     cta={{ href: "/menu?categoria=crudite,da-condividere", label: "Crudité e grigliate" }}
                 >
                     <p>
-                        Dalla tartare di tonno alla crudité reale con ostriche Gillardeau, scampi e capesante. E per la tavolata, la
+                        Dalla tartare di tonno alla crudité reale con ostriche, scampi, gamberi di Mazara e capesante. E per la tavolata, la
                         barca di mare per due o la grigliata extra large.
                     </p>
                     <p className="text-sm">Prodotti variabili secondo stagione e disponibilità del mercato.</p>
