@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>A · Pietra e acciaio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --stone: #eeebe4;
+    --paper: #f8f6f1;
+    --ink: #181c28;
+    --steel: #8c8e92;
+    --line: #cfccc4;
+    --blue: #26407e; /* blu del logo, spostato dal viola al blu */
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--stone); color: var(--ink); font: 16px/1.6 Inter, sans-serif; }
+  img { display: block; width: 100%; height: 100%; object-fit: cover; }
+  .wrap { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+  .deco { font-family: "Josefin Sans", sans-serif; text-transform: uppercase; letter-spacing: .08em; }
+  .kicker { font: 600 12px/1 "Josefin Sans"; letter-spacing: .3em; text-transform: uppercase; color: var(--blue); }
+  .btn { display: inline-flex; align-items: center; justify-content: center; padding: 16px 28px; font: 600 13px/1 "Josefin Sans"; letter-spacing: .2em; text-transform: uppercase; text-decoration: none; border-radius: 0; }
+  .btn-ink { background: var(--ink); color: #fff; }
+  .btn-blue { background: var(--blue); color: #fff; }
+  .btn-line { border: 1px solid var(--ink); color: var(--ink); }
+
+  header { border-bottom: 1px solid var(--line); background: var(--paper); }
+  header .wrap { display: flex; align-items: center; justify-content: space-between; height: 84px; }
+  header img { height: 58px; width: auto; }
+  nav { display: flex; gap: 36px; }
+  nav a { font: 400 13px/1 "Josefin Sans"; letter-spacing: .2em; text-transform: uppercase; color: var(--ink); text-decoration: none; }
+  nav a.on { color: var(--blue); border-bottom: 1px solid var(--blue); padding-bottom: 4px; }
+  .burger { display: none; width: 44px; height: 44px; border: 1px solid var(--ink); }
+
+  .hero { background: var(--paper); border-bottom: 1px solid var(--line); }
+  .hero .wrap { display: grid; grid-template-columns: 1.1fr .9fr; gap: 64px; align-items: end; padding-top: 72px; }
+  .hero h1 { font: 300 76px/1.02 "Josefin Sans"; text-transform: uppercase; letter-spacing: .02em; margin-top: 24px; }
+  .hero h1 em { font-style: normal; color: var(--blue); font-weight: 400; }
+  .hero p.lead { margin-top: 28px; max-width: 440px; color: #4a4e59; font-size: 17px; }
+  .hero .ctas { display: flex; gap: 12px; margin-top: 36px; padding-bottom: 72px; }
+  .arch { position: relative; aspect-ratio: 4/5; border-radius: 999px 999px 0 0; overflow: hidden; }
+  .arch-frame { position: absolute; inset: -14px -14px 0 -14px; border: 2px solid var(--steel); border-bottom: 0; border-radius: 999px 999px 0 0; pointer-events: none; }
+  .photo-col { position: relative; padding: 14px 14px 0; }
+
+  .facts { display: grid; grid-template-columns: repeat(4, 1fr); border-bottom: 1px solid var(--line); }
+  .facts div { padding: 28px 24px; border-right: 1px solid var(--line); }
+  .facts div:last-child { border-right: 0; }
+  .facts b { display: block; font: 400 30px/1 "Josefin Sans"; letter-spacing: .04em; }
+  .facts span { font-size: 13px; color: #5d616b; }
+
+  section.block { padding: 112px 0; }
+  .head { display: flex; justify-content: space-between; align-items: end; gap: 40px; border-bottom: 1px solid var(--ink); padding-bottom: 24px; }
+  .head h2 { font: 300 48px/1.05 "Josefin Sans"; text-transform: uppercase; margin-top: 14px; }
+  .head p { max-width: 360px; color: #4a4e59; font-size: 15px; }
+
+  .index a { display: grid; grid-template-columns: 80px 1fr 1.2fr 200px; gap: 32px; align-items: center; padding: 28px 0; border-bottom: 1px solid var(--line); color: inherit; text-decoration: none; }
+  .index .n { font: 300 40px/1 "Josefin Sans"; color: var(--steel); }
+  .index h3 { font: 400 30px/1 "Josefin Sans"; text-transform: uppercase; letter-spacing: .06em; }
+  .index p { color: #4a4e59; font-size: 15px; }
+  .index .thumb { height: 120px; }
+
+  .giro { background: var(--ink); color: #fff; }
+  .giro .head { border-color: rgba(255,255,255,.5); }
+  .giro .head p { color: rgba(255,255,255,.7); }
+  .giro .kicker { color: #9fb3e6; }
+  table { width: 100%; border-collapse: collapse; margin-top: 8px; }
+  th, td { text-align: left; padding: 22px 16px; border-bottom: 1px solid rgba(255,255,255,.15); vertical-align: top; }
+  th { font: 400 13px/1 "Josefin Sans"; letter-spacing: .25em; text-transform: uppercase; color: var(--steel); }
+  td.name { font: 400 24px/1 "Josefin Sans"; text-transform: uppercase; letter-spacing: .06em; }
+  td.price { font: 300 34px/1 "Josefin Sans"; }
+  td.desc { color: rgba(255,255,255,.72); font-size: 15px; }
+  tr.hi td { background: rgba(159,179,230,.1); }
+  tr.hi td.name::after { content: "Il più scelto"; display: block; margin-top: 10px; font-size: 11px; letter-spacing: .25em; color: #9fb3e6; }
+
+  .book { display: grid; grid-template-columns: 1fr 1fr; }
+  .book .img { min-height: 520px; }
+  .book .form { background: var(--paper); padding: 72px 64px; }
+  .book h2 { font: 300 44px/1.05 "Josefin Sans"; text-transform: uppercase; margin: 14px 0 28px; }
+  .field { border-bottom: 1px solid var(--ink); padding: 14px 0; display: flex; justify-content: space-between; font-size: 15px; color: #5d616b; }
+  .field b { color: var(--ink); font-weight: 500; }
+
+  @media (max-width: 760px) {
+    nav, header .btn { display: none; }
+    .burger { display: block; }
+    header .wrap { height: 68px; }
+    header img { height: 36px; }
+    .hero .wrap { grid-template-columns: 1fr; gap: 40px; padding-top: 40px; }
+    .hero h1 { font-size: 44px; }
+    .hero .ctas { flex-direction: column; padding-bottom: 0; }
+    .photo-col { order: -1; }
+    .facts { grid-template-columns: 1fr 1fr; }
+    .facts div:nth-child(2) { border-right: 0; }
+    .facts div:nth-child(-n+2) { border-bottom: 1px solid var(--line); }
+    section.block { padding: 72px 0; }
+    .head { flex-direction: column; align-items: start; gap: 16px; }
+    .head h2 { font-size: 34px; }
+    .index a { grid-template-columns: 48px 1fr; gap: 8px 16px; }
+    .index .n { font-size: 28px; grid-row: span 2; }
+    .index p { grid-column: 2; }
+    .index .thumb { display: none; }
+    th:nth-child(3), td.desc { display: none; }
+    td.name { font-size: 18px; } td.price { font-size: 26px; }
+    .book { grid-template-columns: 1fr; }
+    .book .img { min-height: 260px; }
+    .book .form { padding: 48px 24px; }
+    .book h2 { font-size: 32px; }
+  }
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <img src="../public/images/logo-dark.png" alt="Trattoria del Ponte" />
+    <nav><a class="on" href="#">Home</a><a href="#">Menù</a><a href="#">Giro pesce</a><a href="#">Eventi</a><a href="#">Contatti</a></nav>
+    <a class="btn btn-ink" href="#">Prenota</a>
+    <span class="burger"></span>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <div>
+      <p class="kicker">Trattoria · Pizzeria · Gallarate</p>
+      <h1>Il mare,<br />a due passi<br />dal <em>Sempione</em></h1>
+      <p class="lead">Pesce fresco ogni giorno, carne alla griglia e pizza nel forno a legna. Aperti tutti i giorni, a pranzo e a cena, in Corso Sempione 99.</p>
+      <div class="ctas"><a class="btn btn-blue" href="#">Prenota un tavolo</a><a class="btn btn-line" href="#">Guarda il menù</a></div>
+    </div>
+    <div class="photo-col">
+      <div class="arch"><img src="../public/images/scoglio.jpg" alt="" /></div>
+      <div class="arch-frame"></div>
+    </div>
+  </div>
+</section>
+<div class="wrap facts">
+  <div><b>7 su 7</b><span>Pranzo e cena</span></div>
+  <div><b>Da € 40</b><span>Giro pesce a volontà</span></div>
+  <div><b>50 posti</b><span>Sala per cerimonie</span></div>
+  <div><b>Asporto</b><span>Pizza e cucina</span></div>
+</div>
+
+<section class="block">
+  <div class="wrap">
+    <div class="head"><div><p class="kicker">La cucina</p><h2>Mare, terra<br />e forno a legna</h2></div><p>Il pesce arriva fresco ogni mattina e cambia con il mercato. Accanto, i classici di carne e una pizzeria vera.</p></div>
+    <div class="index">
+      <a href="#"><span class="n">01</span><h3>Il mare</h3><p>Crudité, antipasti, paccheri e spaghetti allo scoglio, grigliate e fritto misto.</p><div class="thumb"><img src="../public/images/fritto.jpg" alt="" /></div></a>
+      <a href="#"><span class="n">02</span><h3>La terra</h3><p>Gnocco fritto e salumi, carbonara, costata alla griglia e cotoletta alla milanese.</p><div class="thumb"><img src="../public/images/tagliata.jpg" alt="" /></div></a>
+      <a href="#"><span class="n">03</span><h3>La pizzeria</h3><p>Pizza bassa e croccante nel forno a legna, anche con impasto a lievitazione naturale.</p><div class="thumb"><img src="../public/images/margherita.jpg" alt="" /></div></a>
+    </div>
+  </div>
+</section>
+
+<section class="block giro">
+  <div class="wrap">
+    <div class="head"><div><p class="kicker">La specialità della casa</p><h2>Il giro pesce</h2></div><p>Portate di pesce a volontà, preparate al momento, fino allo stop del tavolo. Minimo 4 persone.</p></div>
+    <table>
+      <tr><th>Formula</th><th>A persona</th><th>Cosa arriva in tavola</th></tr>
+      <tr><td class="name">Basic</td><td class="price">€ 40</td><td class="desc">Almeno 6 antipasti, 2 primi e 2 secondi di pesce.</td></tr>
+      <tr><td class="name">Gold</td><td class="price">€ 45</td><td class="desc">Il Basic più un primo a scelta: spaghetti 3 orgasmi, risotto alla pescatora o gamberi di Mazara e pistacchio.</td></tr>
+      <tr class="hi"><td class="name">Platinum</td><td class="price">€ 50</td><td class="desc">Il Basic più una crudité di pesce.</td></tr>
+      <tr><td class="name">Diamond</td><td class="price">€ 60</td><td class="desc">Il Basic con crudité di pesce e paccheri all'astice.</td></tr>
+    </table>
+  </div>
+</section>
+
+<section class="book">
+  <div class="img"><img src="../public/images/sala.jpg" alt="" /></div>
+  <div class="form">
+    <p class="kicker">Prenotazioni</p>
+    <h2>Prenota<br />il tuo tavolo</h2>
+    <div class="field">Nome e cognome</div>
+    <div class="field">Data <b>Sabato 12 dicembre</b></div>
+    <div class="field">Servizio <b>Cena · 20:30</b></div>
+    <div class="field">Persone <b>4</b></div>
+    <a class="btn btn-blue" style="margin-top:32px" href="#">Invia su WhatsApp</a>
+  </div>
+</section>
+</body>
+</html>

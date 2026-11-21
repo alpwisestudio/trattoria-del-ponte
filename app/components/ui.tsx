@@ -1,14 +1,22 @@
 import Image, { type StaticImageData } from "next/image";
 import Link from "next/link";
-import { Arch, Rule, Wave } from "../decor";
-import logo from "../../public/images/logo-ponte.png";
+import { ArchPhoto } from "../decor";
+import logoDark from "../../public/images/logo-dark.png";
+import logoLight from "../../public/images/logo-light.png";
 import { delay } from "./delay";
 
-/** Logo originale del locale (scritta bianca su blu): va sempre su fondo navy. */
-export function Logo({ className = "h-12 w-auto" }: { className?: string }) {
-    return <Image src={logo} alt="Trattoria del Ponte" priority sizes="200px" className={className} />;
+/** Logo del locale scontornato dal fondo blu: scuro sui fondi chiari, bianco sui fondi scuri. */
+export function Logo({ light, className = "h-12 w-auto" }: { light?: boolean; className?: string }) {
+    return (
+        <Image src={light ? logoLight : logoDark} alt="Trattoria del Ponte" priority sizes="240px" className={className} />
+    );
 }
 
+export function Container({ children, className = "" }: { children: React.ReactNode; className?: string }) {
+    return <div className={`mx-auto w-full max-w-6xl px-6 ${className}`}>{children}</div>;
+}
+
+/** Intestazione di sezione: titolo a sinistra, testo a destra, filo sotto. */
 export function Heading({
     kicker,
     title,
@@ -16,70 +24,72 @@ export function Heading({
     light,
 }: {
     kicker?: string;
-    title: string;
+    title: React.ReactNode;
     text?: string;
     light?: boolean;
 }) {
     return (
-        <div data-reveal className="mx-auto max-w-2xl text-center">
-            {kicker && <p className={`kicker ${light ? "text-gold" : "text-gold-deep"}`}>{kicker}</p>}
-            <h2
-                className={`mt-3 font-serif text-4xl font-semibold leading-tight md:text-5xl ${light ? "text-white" : "text-navy"}`}
-            >
-                {title}
-            </h2>
-            <Rule className={`mt-5 ${light ? "text-gold" : "text-gold-deep"}`} />
+        <div
+            data-reveal
+            className={`flex flex-col gap-5 border-b pb-7 md:flex-row md:items-end md:justify-between md:gap-12 ${
+                light ? "border-white/40" : "border-ink"
+            }`}
+        >
+            <div>
+                {kicker && <p className={`kicker ${light ? "text-ice" : "text-blue"}`}>{kicker}</p>}
+                <h2 className={`deco mt-4 text-4xl leading-[1.05] md:text-5xl ${light ? "text-white" : "text-ink"}`}>{title}</h2>
+            </div>
             {text && (
-                <p className={`mx-auto mt-5 max-w-lg leading-relaxed ${light ? "text-white/70" : "text-ink/65"}`}>{text}</p>
+                <p className={`max-w-sm text-[0.95rem] leading-relaxed md:pb-1 ${light ? "text-white/70" : "text-muted"}`}>{text}</p>
             )}
         </div>
     );
 }
 
-/** Testata delle pagine interne: foto scurita in blu, titolo e arco. */
+/** Testata delle pagine interne: testo a sinistra, foto nell'arco a destra. */
 export function PageHero({
     kicker,
     title,
     text,
     image,
+    alt = "",
+    children,
 }: {
     kicker: string;
-    title: string;
+    title: React.ReactNode;
     text?: string;
     image: StaticImageData;
+    alt?: string;
+    children?: React.ReactNode;
 }) {
     return (
-        <section className="night relative px-6 pb-24 pt-36 text-center text-white md:pb-28 md:pt-44">
-            <div className="absolute inset-0 overflow-hidden">
-                <Image
-                    src={image}
-                    alt=""
-                    fill
-                    priority
-                    placeholder="blur"
-                    sizes="100vw"
-                    className="animate-ken-burns object-cover opacity-35"
-                />
-            </div>
-            <div className="absolute inset-0 bg-linear-to-b from-navy/60 via-navy/40 to-navy" />
-            <div className="relative mx-auto max-w-3xl">
-                <Arch animate className="mx-auto w-40 text-silver/70 md:w-52" />
-                <p className="hero-in kicker -mt-2 text-gold">{kicker}</p>
-                <h1 style={delay(1)} className="hero-in mt-4 font-serif text-5xl font-semibold leading-[1.05] md:text-7xl">
-                    {title}
-                </h1>
-                {text && (
-                    <p style={delay(2)} className="hero-in mx-auto mt-6 max-w-xl leading-relaxed text-white/75">
-                        {text}
-                    </p>
-                )}
-            </div>
-            <Wave side="bottom" />
+        <section className="border-b border-line bg-paper pt-16 md:pt-20">
+            <Container className="grid items-end gap-10 pt-10 md:grid-cols-[1.25fr_1fr] md:gap-16 md:pt-16">
+                <div className="md:pb-20">
+                    <p className="hero-in kicker text-blue">{kicker}</p>
+                    <h1 style={delay(1)} className="hero-in deco mt-5 text-5xl leading-[1.02] md:text-7xl">
+                        {title}
+                    </h1>
+                    {text && (
+                        <p style={delay(2)} className="hero-in mt-6 max-w-md text-[1.05rem] leading-relaxed text-muted">
+                            {text}
+                        </p>
+                    )}
+                    {children && (
+                        <div style={delay(3)} className="hero-in mt-8 flex flex-wrap gap-3">
+                            {children}
+                        </div>
+                    )}
+                </div>
+                <div style={delay(2)} className="hero-in mx-auto w-full max-w-sm md:max-w-none">
+                    <ArchPhoto src={image} alt={alt} priority sizes="(max-width: 768px) 90vw, 440px" ratio="aspect-[5/4] md:aspect-[4/5]" />
+                </div>
+            </Container>
         </section>
     );
 }
 
-/** Foto e testo affiancati. */
+/** Foto nell'arco e testo affiancati. */
 export function Feature({
     kicker,
     title,
@@ -98,33 +108,20 @@ export function Feature({
     cta?: { href: string; label: string };
 }) {
     return (
-        <div className="mx-auto grid max-w-6xl items-center gap-12 md:grid-cols-2 md:gap-16">
-            <div data-reveal={reverse ? "right" : "left"} className={`group relative ${reverse ? "md:order-2" : ""}`}>
-                <div className="relative aspect-[4/5] overflow-hidden rounded-t-[999px] shadow-2xl shadow-navy/20 md:aspect-[5/6]">
-                    <Image
-                        src={image}
-                        alt={alt}
-                        fill
-                        sizes="(max-width: 768px) 90vw, 520px"
-                        placeholder="blur"
-                        className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-                    />
-                </div>
-                <div
-                    aria-hidden
-                    className={`absolute -bottom-5 h-24 w-24 border-b-2 border-gold-deep/50 ${reverse ? "-left-5 border-l-2" : "-right-5 border-r-2"}`}
-                />
+        <Container className="grid items-center gap-12 md:grid-cols-2 md:gap-20">
+            <div data-reveal className={`group mx-auto w-full max-w-md ${reverse ? "md:order-2" : ""}`}>
+                <ArchPhoto src={image} alt={alt} sizes="(max-width: 768px) 90vw, 460px" />
             </div>
-            <div data-reveal style={delay(1)} className="text-center md:text-left">
-                <p className="kicker text-gold-deep">{kicker}</p>
-                <h2 className="mt-3 font-serif text-4xl font-semibold leading-tight text-navy md:text-5xl">{title}</h2>
-                <div className="mt-6 space-y-4 leading-relaxed text-ink/70">{children}</div>
+            <div data-reveal style={delay(1)}>
+                <p className="kicker text-blue">{kicker}</p>
+                <h2 className="deco mt-4 text-4xl leading-[1.05] md:text-5xl">{title}</h2>
+                <div className="mt-6 space-y-4 leading-relaxed text-muted">{children}</div>
                 {cta && (
-                    <Link href={cta.href} className="btn btn-navy mt-8">
+                    <Link href={cta.href} className="btn btn-ink mt-8">
                         {cta.label}
                     </Link>
                 )}
             </div>
-        </div>
+        </Container>
     );
 }

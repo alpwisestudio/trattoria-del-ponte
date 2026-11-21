@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>C · Trattoria di città</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@500;700;800&family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bone: #f3ece0;
+    --card: #fbf7f0;
+    --ink: #1b2233; /* blu del logo portato quasi al nero */
+    --steel: #8c8e92;
+    --brick: #b4502e; /* terracotta, complementare al blu */
+    --line: #d9cfbf;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bone); color: var(--ink); font: 16px/1.6 "DM Sans", sans-serif; }
+  img { display: block; width: 100%; height: 100%; object-fit: cover; }
+  .wrap { max-width: 1240px; margin: 0 auto; padding: 0 24px; }
+  .disp { font-family: "Big Shoulders Display", sans-serif; text-transform: uppercase; }
+  .it { font-family: "Instrument Serif", serif; font-style: italic; text-transform: none; font-weight: 400; }
+  .kicker { font: 700 12px/1 "DM Sans"; letter-spacing: .22em; text-transform: uppercase; color: var(--brick); }
+  .btn { display: inline-flex; align-items: center; justify-content: center; padding: 16px 28px; border-radius: 2px; font: 700 14px/1 "DM Sans"; letter-spacing: .04em; text-decoration: none; }
+  .btn-brick { background: var(--brick); color: #fff; }
+  .btn-ink { background: var(--ink); color: #fff; }
+  .btn-line { border: 2px solid var(--ink); color: var(--ink); }
+
+  .topbar { background: var(--ink); color: rgba(255,255,255,.8); font-size: 13px; }
+  .topbar .wrap { display: flex; justify-content: space-between; height: 38px; align-items: center; }
+  header .wrap { display: flex; align-items: center; justify-content: space-between; height: 96px; border-bottom: 2px solid var(--ink); }
+  header img { height: 54px; width: auto; }
+  nav { display: flex; gap: 32px; }
+  nav a { font: 700 18px/1 "Big Shoulders Display"; letter-spacing: .06em; text-transform: uppercase; color: var(--ink); text-decoration: none; }
+  nav a.on { color: var(--brick); }
+  .burger { display: none; width: 46px; height: 46px; background: var(--ink); }
+
+  .hero { padding: 56px 0 0; }
+  .hero h1 { font: 800 168px/.86 "Big Shoulders Display"; text-transform: uppercase; letter-spacing: -.01em; margin-top: 22px; }
+  .hero h1 .it { font-size: .62em; color: var(--brick); letter-spacing: 0; }
+  .hero .under { display: grid; grid-template-columns: 1fr auto; gap: 40px; align-items: end; margin-top: 28px; }
+  .hero .under p { max-width: 520px; font-size: 18px; color: #475066; }
+  .ctas { display: flex; gap: 12px; }
+  .strip { display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 12px; margin-top: 48px; height: 380px; }
+  .strip div { position: relative; overflow: hidden; }
+  .strip span { position: absolute; left: 14px; bottom: 14px; background: var(--card); padding: 6px 12px; font-size: 13px; font-weight: 700; }
+
+  .ticker { background: var(--brick); color: #fff; margin-top: 72px; overflow: hidden; white-space: nowrap; }
+  .ticker div { display: inline-block; padding: 18px 0; font: 700 26px/1 "Big Shoulders Display"; letter-spacing: .06em; text-transform: uppercase; }
+  .ticker b { color: var(--ink); margin: 0 22px; }
+
+  section.block { padding: 104px 0; }
+  .split-head { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: end; margin-bottom: 48px; }
+  .split-head h2 { font: 800 80px/.9 "Big Shoulders Display"; text-transform: uppercase; margin-top: 14px; }
+  .split-head p { color: #475066; font-size: 17px; }
+
+  .cols { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; border-top: 2px solid var(--ink); }
+  .col { padding: 28px 28px 32px; border-right: 1px solid var(--line); }
+  .col:last-child { border-right: 0; }
+  .col .n { font: 800 64px/1 "Big Shoulders Display"; color: var(--brick); }
+  .col .img { aspect-ratio: 1; margin: 18px 0 22px; }
+  .col h3 { font: 800 36px/1 "Big Shoulders Display"; text-transform: uppercase; }
+  .col p { margin-top: 10px; color: #475066; font-size: 15px; }
+  .col a { display: inline-block; margin-top: 18px; font-weight: 700; color: var(--ink); text-underline-offset: 4px; }
+
+  .giro { background: var(--ink); color: #fff; }
+  .giro .split-head p { color: rgba(255,255,255,.7); }
+  .giro .kicker { color: #e58a68; }
+  .ticket { background: var(--card); color: var(--ink); padding: 48px; display: grid; grid-template-columns: 1fr 1fr; gap: 12px 64px; position: relative; }
+  .ticket::before, .ticket::after { content: ""; position: absolute; top: 50%; width: 32px; height: 32px; border-radius: 50%; background: var(--ink); transform: translateY(-50%); }
+  .ticket::before { left: -16px; } .ticket::after { right: -16px; }
+  .line { display: flex; align-items: baseline; gap: 12px; padding: 16px 0; border-bottom: 1px dashed var(--line); }
+  .line h4 { font: 800 30px/1 "Big Shoulders Display"; text-transform: uppercase; }
+  .line .dots { flex: 1; border-bottom: 2px dotted var(--steel); transform: translateY(-6px); }
+  .line .pr { font: 800 34px/1 "Big Shoulders Display"; color: var(--brick); }
+  .line + p, .item p { font-size: 14px; color: #5b6377; padding: 8px 0 4px; }
+  .hi h4::after { content: "Il più scelto"; font: 700 11px/1 "DM Sans"; letter-spacing: .16em; background: var(--brick); color: #fff; padding: 5px 8px; margin-left: 10px; vertical-align: middle; }
+
+  .book { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border: 2px solid var(--ink); }
+  .book .l { padding: 56px; background: var(--card); }
+  .book h2 { font: 800 72px/.9 "Big Shoulders Display"; text-transform: uppercase; margin-top: 14px; }
+  .book .r { padding: 56px; }
+  .f { border: 2px solid var(--ink); background: #fff; padding: 14px 16px; margin-bottom: 12px; font-size: 14px; color: #5b6377; display: flex; justify-content: space-between; }
+  .f b { color: var(--ink); }
+
+  @media (max-width: 760px) {
+    .topbar span:last-child, nav, header .btn { display: none; }
+    .burger { display: block; }
+    header .wrap { height: 76px; } header img { height: 40px; }
+    .hero { padding-top: 32px; }
+    .hero h1 { font-size: 72px; }
+    .hero .under { grid-template-columns: 1fr; }
+    .ctas { flex-direction: column; }
+    .strip { grid-template-columns: 1fr 1fr; height: auto; }
+    .strip div { height: 160px; }
+    .strip div:first-child { grid-column: span 2; height: 220px; }
+    .ticker div { font-size: 20px; }
+    section.block { padding: 72px 0; }
+    .split-head { grid-template-columns: 1fr; gap: 16px; }
+    .split-head h2 { font-size: 54px; }
+    .cols { grid-template-columns: 1fr; }
+    .col { border-right: 0; border-bottom: 1px solid var(--line); padding: 24px 0; }
+    .ticket { grid-template-columns: 1fr; padding: 28px 22px; }
+    .line h4 { font-size: 24px; } .line .pr { font-size: 26px; }
+    .book { grid-template-columns: 1fr; }
+    .book .l, .book .r { padding: 28px 22px; }
+    .book h2 { font-size: 52px; }
+  }
+</style>
+</head>
+<body>
+<div class="topbar"><div class="wrap"><span>Corso Sempione 99, Gallarate</span><span>Aperti tutti i giorni · 0331 777292</span></div></div>
+<header>
+  <div class="wrap">
+    <img src="../public/images/logo-dark.png" alt="Trattoria del Ponte" />
+    <nav><a class="on" href="#">Home</a><a href="#">Menù</a><a href="#">Giro pesce</a><a href="#">Eventi</a><a href="#">Contatti</a></nav>
+    <a class="btn btn-brick" href="#">Prenota</a>
+    <span class="burger"></span>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <p class="kicker">Trattoria · Pizzeria · dal Sempione</p>
+    <h1>Pesce, brace<br /><span class="it">e forno a legna</span></h1>
+    <div class="under">
+      <p>Il pesce arriva fresco ogni mattina, la carne va sulla griglia, la pizza nel forno a legna. A pranzo e a cena, tutti i giorni.</p>
+      <div class="ctas"><a class="btn btn-brick" href="#">Prenota un tavolo</a><a class="btn btn-line" href="#">Il menù</a></div>
+    </div>
+    <div class="strip">
+      <div><img src="../public/images/scoglio.jpg" alt="" /><span>Spaghetti allo scoglio</span></div>
+      <div><img src="../public/images/tagliata.jpg" alt="" /><span>Tagliata</span></div>
+      <div><img src="../public/images/pizza.jpg" alt="" /><span>Pizza a legna</span></div>
+    </div>
+  </div>
+  <div class="ticker"><div>Giro pesce da € 40<b>✦</b>Crudité<b>✦</b>Sala fino a 50 persone<b>✦</b>Asporto<b>✦</b>Natale e Capodanno<b>✦</b>Giro pesce da € 40<b>✦</b>Crudité</div></div>
+</section>
+
+<section class="block">
+  <div class="wrap">
+    <div class="split-head"><div><p class="kicker">La cucina</p><h2>Tre cucine,<br />una trattoria</h2></div><p>Mare, terra e pizzeria: scegli da dove partire, il menù completo è a un tocco.</p></div>
+    <div class="cols">
+      <div class="col"><div class="n">01</div><div class="img"><img src="../public/images/fritto.jpg" alt="" /></div><h3>Il mare</h3><p>Crudité, paccheri allo scoglio, grigliate e fritto misto.</p><a href="#">Vedi i piatti</a></div>
+      <div class="col"><div class="n">02</div><div class="img"><img src="../public/images/tagliata.jpg" alt="" /></div><h3>La terra</h3><p>Gnocco fritto e salumi, carbonara, costata e cotoletta.</p><a href="#">Vedi i piatti</a></div>
+      <div class="col"><div class="n">03</div><div class="img"><img src="../public/images/margherita.jpg" alt="" /></div><h3>La pizzeria</h3><p>Bassa e croccante, anche a lievitazione naturale.</p><a href="#">Vedi le pizze</a></div>
+    </div>
+  </div>
+</section>
+
+<section class="block giro">
+  <div class="wrap">
+    <div class="split-head"><div><p class="kicker">La specialità della casa</p><h2>Il giro pesce</h2></div><p>Portate di pesce a volontà, fino allo stop del tavolo. Minimo 4 persone, prezzi a persona.</p></div>
+    <div class="ticket">
+      <div class="item"><div class="line"><h4>Basic</h4><span class="dots"></span><span class="pr">€ 40</span></div><p>Almeno 6 antipasti, 2 primi e 2 secondi di pesce.</p></div>
+      <div class="item"><div class="line"><h4>Gold</h4><span class="dots"></span><span class="pr">€ 45</span></div><p>Il Basic più un primo a scelta tra le specialità.</p></div>
+      <div class="item hi"><div class="line"><h4>Platinum</h4><span class="dots"></span><span class="pr">€ 50</span></div><p>Il Basic più una crudité di pesce.</p></div>
+      <div class="item"><div class="line"><h4>Diamond</h4><span class="dots"></span><span class="pr">€ 60</span></div><p>Crudité di pesce e paccheri all'astice.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="block">
+  <div class="wrap">
+    <div class="book">
+      <div class="l"><p class="kicker">Prenotazioni</p><h2>Ti teniamo<br />il tavolo</h2><p style="margin-top:18px;color:#475066">La richiesta arriva su WhatsApp e ti confermiamo in pochi minuti.</p></div>
+      <div class="r">
+        <div class="f">Nome<b>Mario Rossi</b></div>
+        <div class="f">Data<b>Sabato 12 dicembre</b></div>
+        <div class="f">Servizio<b>Cena · 20:30</b></div>
+        <div class="f">Persone<b>4</b></div>
+        <a class="btn btn-ink" style="width:100%;margin-top:8px" href="#">Invia su WhatsApp</a>
+      </div>
+    </div>
+  </div>
+</section>
+</body>
+</html>

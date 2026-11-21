@@ -11,8 +11,8 @@ function Pill({ active, label, onClick }: { active: boolean; label: string; onCl
             type="button"
             aria-pressed={active}
             onClick={(e) => onClick?.(e.currentTarget)}
-            className={`shrink-0 snap-center border px-4 py-2.5 text-xs font-bold uppercase tracking-[0.12em] transition-colors ${
-                active ? "border-navy bg-navy text-white" : "border-navy/15 bg-white text-ink/70 hover:border-navy/50 hover:text-navy"
+            className={`shrink-0 snap-center border px-4 pb-2 pt-2.5 font-display text-xs uppercase tracking-[0.16em] transition-colors ${
+                active ? "border-ink bg-ink text-white" : "border-line bg-paper text-muted hover:border-ink hover:text-ink"
             }`}
         >
             {label}
@@ -30,7 +30,7 @@ function FilterBar({
     onClear?: () => void;
 }) {
     return (
-        <div className="sticky top-16 z-30 border-b border-navy/10 bg-cream/95 backdrop-blur-md md:top-20">
+        <div className="sticky top-16 z-30 border-b border-line bg-stone/95 backdrop-blur-md md:top-20">
             <div
                 role="group"
                 aria-label="Filtra le categorie del menù"
@@ -48,7 +48,7 @@ function FilterBar({
 function MenuPanel({ selected }: { selected: string[] }) {
     const categories = selected.length ? MENU.filter((c) => selected.includes(c.id)) : MENU;
     return (
-        <div id="menu-panel" aria-live="polite" className="px-6 py-16">
+        <div id="menu-panel" aria-live="polite" className="px-6 py-16 md:py-20">
             <div key={selected.join()} className="animate-menu-in">
                 <MenuGrid categories={categories} single={categories.length === 1} />
             </div>

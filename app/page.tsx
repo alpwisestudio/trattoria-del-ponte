@@ -1,9 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
 import { delay } from "./components/delay";
-import { BookingSection, ContactCard, GiroCards, MapEmbed } from "./components/sections";
-import { Feature, Heading } from "./components/ui";
-import { Arch, Wave } from "./decor";
+import { BookingSection, ContactCard, GiroTable, MapEmbed } from "./components/sections";
+import { Container, Feature, Heading } from "./components/ui";
+import { ArchPhoto } from "./decor";
 import { SEASONAL } from "./info";
 import scoglio from "../public/images/scoglio.jpg";
 import fritto from "../public/images/fritto.jpg";
@@ -13,10 +13,10 @@ import grigliata from "../public/images/grigliata.jpg";
 import convivio from "../public/images/convivio.jpg";
 
 const FACTS = [
-    { n: "7 su 7", l: "Aperti a pranzo e a cena" },
-    { n: "da € 40", l: "Giro pesce a volontà" },
-    { n: "50", l: "Posti nella sala cerimonie" },
-    { n: "Asporto", l: "Pizza e cucina da portare a casa" },
+    { n: "7 su 7", l: "Pranzo e cena" },
+    { n: "Da € 40", l: "Giro pesce a volontà" },
+    { n: "50 posti", l: "Sala per cerimonie" },
+    { n: "Asporto", l: "Pizza e cucina" },
 ];
 
 const KITCHENS = [
@@ -46,42 +46,23 @@ const KITCHENS = [
 export default function Home() {
     return (
         <>
-            {/* Hero */}
-            <section className="night relative px-6 pb-32 pt-36 text-white md:pb-40 md:pt-48">
-                <div className="absolute inset-0 overflow-hidden">
-                    <Image
-                        src={scoglio}
-                        alt=""
-                        fill
-                        priority
-                        placeholder="blur"
-                        sizes="100vw"
-                        className="animate-ken-burns object-cover opacity-45"
-                    />
-                </div>
-                <div className="absolute inset-0 bg-linear-to-r from-navy via-navy/80 to-navy/30" />
-                <div className="absolute inset-0 bg-linear-to-b from-transparent via-transparent to-navy/80" />
-
-                <div className="relative mx-auto max-w-6xl">
-                    <div className="max-w-2xl">
-                        <Arch animate className="w-36 text-silver/70 md:w-44" />
-                        <p className="hero-in kicker mt-2 text-gold">Trattoria · Pizzeria · Gallarate</p>
-                        <h1
-                            style={delay(1)}
-                            className="hero-in mt-5 font-serif text-6xl font-semibold leading-[0.95] sm:text-7xl md:text-8xl"
-                        >
+            {/* Hero: testo a sinistra, foto nell'arco del ponte a destra */}
+            <section className="border-b border-line bg-paper pt-16 md:pt-20">
+                <Container className="grid items-end gap-10 pt-8 md:grid-cols-[1.15fr_1fr] md:gap-16 md:pt-16">
+                    <div className="md:pb-20">
+                        <p className="hero-in kicker text-blue">Trattoria · Pizzeria · Gallarate</p>
+                        <h1 style={delay(1)} className="hero-in deco mt-6 text-[2.9rem] leading-[1.02] sm:text-6xl lg:text-[5.25rem]">
                             Il mare,
+                            <br />a due passi
                             <br />
-                            <em className="font-medium text-gold">a due passi</em>
-                            <br />
-                            dal Sempione
+                            dal <span className="font-normal text-blue">Sempione</span>
                         </h1>
-                        <p style={delay(2)} className="hero-in mt-7 max-w-lg text-lg leading-relaxed text-white/80">
-                            Pesce fresco ogni giorno, carne alla griglia e pizza nel forno a legna. Aperti tutti i giorni, a
-                            pranzo e a cena, in Corso Sempione 99.
+                        <p style={delay(2)} className="hero-in mt-7 max-w-md text-[1.05rem] leading-relaxed text-muted">
+                            Pesce fresco ogni giorno, carne alla griglia e pizza nel forno a legna. Aperti tutti i giorni, a pranzo e
+                            a cena, in Corso Sempione 99.
                         </p>
-                        <div style={delay(3)} className="hero-in mt-10 flex flex-wrap gap-4">
-                            <Link href="/contatti#prenota" className="btn btn-gold">
+                        <div style={delay(3)} className="hero-in mt-9 flex flex-wrap gap-3">
+                            <Link href="/contatti#prenota" className="btn btn-blue">
                                 Prenota un tavolo
                             </Link>
                             <Link href="/menu" className="btn btn-line">
@@ -89,82 +70,109 @@ export default function Home() {
                             </Link>
                         </div>
                     </div>
-                </div>
-                <Wave side="bottom" />
+                    <div style={delay(2)} className="hero-in order-first mx-auto w-full max-w-sm md:order-none md:max-w-none">
+                        <ArchPhoto
+                            src={scoglio}
+                            alt="Spaghetti allo scoglio con cozze, vongole e gamberi"
+                            priority
+                            sizes="(max-width: 768px) 90vw, 500px"
+                            ratio="aspect-[5/4] md:aspect-[4/5]"
+                        />
+                    </div>
+                </Container>
             </section>
 
             {/* Fatti */}
-            <section className="px-6">
-                <dl className="mx-auto -mt-6 grid max-w-6xl grid-cols-2 border border-navy/10 bg-white shadow-xl shadow-navy/5 md:-mt-10 md:grid-cols-4">
+            <Container>
+                <dl className="grid grid-cols-2 md:grid-cols-4">
                     {FACTS.map((f, i) => (
                         <div
                             key={f.l}
                             data-reveal
                             style={delay(i)}
-                            className={`px-5 py-7 text-center md:px-8 ${i % 2 ? "border-l border-navy/10" : ""} ${i > 1 ? "border-t border-navy/10 md:border-t-0" : ""} ${i === 2 ? "md:border-l" : ""}`}
+                            className={`border-line py-7 md:px-6 ${i % 2 ? "border-l pl-5" : "pr-5 md:pl-0"} ${i > 1 ? "border-t md:border-t-0" : ""} ${i === 2 ? "md:border-l md:pl-6" : ""}`}
                         >
-                            <dt className="font-serif text-3xl font-bold text-navy md:text-4xl">{f.n}</dt>
-                            <dd className="mt-1 text-xs font-semibold text-ink/60">{f.l}</dd>
+                            <dt className="font-display text-[1.65rem] leading-none md:text-3xl">{f.n}</dt>
+                            <dd className="mt-2 text-[0.8rem] text-muted">{f.l}</dd>
                         </div>
                     ))}
                 </dl>
-            </section>
+            </Container>
 
-            {/* Tre cucine */}
-            <section className="px-6 py-28">
-                <Heading
-                    kicker="La cucina"
-                    title="Mare, terra e forno a legna"
-                    text="Il pesce arriva fresco ogni mattina e cambia con il mercato. Accanto, i classici di carne e una pizzeria vera."
-                />
-                <div className="mx-auto mt-16 grid max-w-6xl gap-10 md:grid-cols-3 md:gap-8">
-                    {KITCHENS.map((k, i) => (
-                        <Link key={k.title} href={k.href} data-reveal style={delay(i + 1)} className="group text-center">
-                            <div className="relative mx-auto aspect-[4/5] max-w-sm overflow-hidden rounded-t-[999px] shadow-xl shadow-navy/15">
-                                <Image
-                                    src={k.img}
-                                    alt={k.alt}
-                                    fill
-                                    sizes="(max-width: 768px) 90vw, 360px"
-                                    placeholder="blur"
-                                    className="object-cover transition-transform duration-700 group-hover:scale-110"
-                                />
-                            </div>
-                            <h3 className="mt-7 font-serif text-3xl font-semibold text-navy">{k.title}</h3>
-                            <p className="mx-auto mt-2 max-w-xs text-sm leading-relaxed text-ink/65">{k.text}</p>
-                            <span className="kicker mt-4 inline-flex items-center gap-2 text-gold-deep transition-[gap] group-hover:gap-3">
-                                Vedi i piatti <span aria-hidden>→</span>
-                            </span>
-                        </Link>
-                    ))}
-                </div>
+            {/* Le tre cucine, come un indice */}
+            <section className="border-t border-line py-24 md:py-28">
+                <Container>
+                    <Heading
+                        kicker="La cucina"
+                        title={
+                            <>
+                                Mare, terra
+                                <br />e forno a legna
+                            </>
+                        }
+                        text="Il pesce arriva fresco ogni mattina e cambia con il mercato. Accanto, i classici di carne e una pizzeria vera."
+                    />
+                    <ul>
+                        {KITCHENS.map((k, i) => (
+                            <li key={k.title} data-reveal style={delay(i)} className="border-b border-line">
+                                <Link
+                                    href={k.href}
+                                    className="group grid grid-cols-[3rem_1fr] items-center gap-x-4 gap-y-2 py-7 md:grid-cols-[5rem_1fr_1.3fr_11rem] md:gap-8"
+                                >
+                                    <span className="row-span-2 self-start font-display text-3xl font-light text-steel md:row-span-1 md:self-center md:text-4xl">
+                                        0{i + 1}
+                                    </span>
+                                    <h3 className="deco text-2xl !font-normal tracking-[0.06em] transition-colors group-hover:text-blue md:text-3xl">
+                                        {k.title}
+                                    </h3>
+                                    <p className="text-[0.95rem] leading-relaxed text-muted">
+                                        {k.text}
+                                        <span className="mt-3 block md:hidden">
+                                            <span className="arrow-link text-ink">
+                                                Vedi i piatti <span aria-hidden>→</span>
+                                            </span>
+                                        </span>
+                                    </p>
+                                    <div className="relative hidden h-28 overflow-hidden md:block">
+                                        <Image
+                                            src={k.img}
+                                            alt={k.alt}
+                                            fill
+                                            sizes="176px"
+                                            placeholder="blur"
+                                            className="object-cover transition-transform duration-700 group-hover:scale-110"
+                                        />
+                                    </div>
+                                </Link>
+                            </li>
+                        ))}
+                    </ul>
+                </Container>
             </section>
 
             {/* Giro pesce */}
-            <section className="night relative px-6 py-28 text-white">
-                <Wave side="top" />
-                <Heading
-                    light
-                    kicker="La specialità della casa"
-                    title="Il giro pesce, finché non dici basta"
-                    text="Portate di pesce a volontà, preparate al momento, fino allo stop del tavolo. Minimo 4 persone."
-                />
-                <div className="mt-16">
-                    <GiroCards light />
-                </div>
-                <div data-reveal className="mt-14 flex flex-wrap justify-center gap-4">
-                    <Link href="/giro-pesce" className="btn btn-gold">
-                        Scopri il giro pesce
-                    </Link>
-                    <Link href="/contatti#prenota" className="btn btn-line">
-                        Prenota per il tuo gruppo
-                    </Link>
-                </div>
-                <Wave side="bottom" />
+            <section className="bg-ink py-24 text-white md:py-28">
+                <Container>
+                    <Heading
+                        light
+                        kicker="La specialità della casa"
+                        title="Il giro pesce"
+                        text="Portate di pesce a volontà, preparate al momento, fino allo stop del tavolo. Minimo 4 persone."
+                    />
+                    <GiroTable />
+                    <div data-reveal className="mt-12 flex flex-col gap-3 sm:flex-row">
+                        <Link href="/giro-pesce" className="btn btn-light">
+                            Scopri il giro pesce
+                        </Link>
+                        <Link href="/contatti#prenota" className="btn btn-line-light">
+                            Prenota per il tuo gruppo
+                        </Link>
+                    </div>
+                </Container>
             </section>
 
             {/* Crudité */}
-            <section className="px-6 py-28">
+            <section className="py-24 md:py-32">
                 <Feature
                     kicker="Crudité"
                     title="Ostriche, scampi e gamberi rossi di Mazara"
@@ -176,32 +184,39 @@ export default function Home() {
                         Dalla tartare di tonno alla crudité reale con ostriche Gillardeau, scampi e capesante. E per la tavolata, la
                         barca di mare per due o la grigliata extra large.
                     </p>
-                    <p className="text-sm text-ink/55">Prodotti variabili secondo stagione e disponibilità del mercato.</p>
+                    <p className="text-sm">Prodotti variabili secondo stagione e disponibilità del mercato.</p>
                 </Feature>
             </section>
 
             {/* Menù delle feste */}
-            <section className="bg-sand/60 px-6 py-24">
-                <Heading kicker="Le feste al Ponte" title="Natale e Capodanno" />
-                <div className="mx-auto mt-14 grid max-w-5xl gap-6 md:grid-cols-2">
-                    {SEASONAL.map((s, i) => (
-                        <article key={s.name} data-reveal style={delay(i + 1)} className="flex flex-col border border-navy/10 bg-cream p-8 md:p-10">
-                            <p className="kicker text-gold-deep">{s.when}</p>
-                            <div className="mt-3 flex items-baseline justify-between gap-4">
-                                <h3 className="font-serif text-4xl font-semibold text-navy">{s.name}</h3>
-                                <span className="shrink-0 font-serif text-3xl font-bold text-navy">{s.price}</span>
-                            </div>
-                            <p className="mt-4 flex-1 leading-relaxed text-ink/70">{s.text}</p>
-                            <Link href="/contatti#prenota" className="btn btn-line-dark mt-8 self-start">
-                                Prenota il tuo posto
-                            </Link>
-                        </article>
-                    ))}
-                </div>
+            <section className="border-y border-line bg-paper py-24 md:py-28">
+                <Container>
+                    <Heading kicker="Le feste al Ponte" title="Natale e Capodanno" text="Due serate con il menù fisso, da prenotare per tempo." />
+                    <div className="grid md:grid-cols-2">
+                        {SEASONAL.map((s, i) => (
+                            <article
+                                key={s.name}
+                                data-reveal
+                                style={delay(i)}
+                                className={`flex flex-col border-b border-line py-10 md:border-b-0 ${i ? "md:border-l md:pl-12" : "md:pr-12"}`}
+                            >
+                                <p className="kicker text-blue">{s.when}</p>
+                                <div className="mt-4 flex items-baseline justify-between gap-4">
+                                    <h3 className="deco text-3xl md:text-4xl">{s.name}</h3>
+                                    <span className="shrink-0 font-display text-3xl tabular-nums">{s.price}</span>
+                                </div>
+                                <p className="mt-4 flex-1 leading-relaxed text-muted">{s.text}</p>
+                                <Link href="/contatti#prenota" className="arrow-link mt-6 text-ink">
+                                    Prenota il tuo posto <span aria-hidden>→</span>
+                                </Link>
+                            </article>
+                        ))}
+                    </div>
+                </Container>
             </section>
 
             {/* Eventi */}
-            <section className="px-6 py-28">
+            <section className="py-24 md:py-32">
                 <Feature
                     reverse
                     kicker="Eventi e cerimonie"
@@ -221,12 +236,14 @@ export default function Home() {
             <BookingSection />
 
             {/* Dove siamo */}
-            <section className="px-6 py-28">
-                <Heading kicker="Dove siamo" title="In Corso Sempione 99" text="A Gallarate, con parcheggio. In estate si mangia fuori, nel dehor." />
-                <div className="mx-auto mt-14 grid max-w-6xl gap-6 md:grid-cols-[1fr_1.4fr]">
-                    <ContactCard />
-                    <MapEmbed />
-                </div>
+            <section className="py-24 md:py-28">
+                <Container>
+                    <Heading kicker="Dove siamo" title="In Corso Sempione 99" text="A Gallarate, con parcheggio. In estate si mangia fuori, nel dehor." />
+                    <div className="mt-12 grid gap-10 md:grid-cols-[1fr_1.3fr] md:gap-14">
+                        <ContactCard />
+                        <MapEmbed />
+                    </div>
+                </Container>
             </section>
         </>
     );

@@ -1,29 +1,33 @@
 @import "tailwindcss";
 
+/* Palette presa dal logo: il blu del fondo (spostato dal viola al blu),
+   il grigio acciaio dell'arco e il bianco delle lettere, su un fondo pietra. */
 :root {
-  --navy: #221d57; /* fondo del logo */
-  --navy-deep: #16133b;
-  --cream: #f7f2e9;
-  --sand: #ece2cf;
-  --ink: #1d1a35;
-  --gold: #d4ae64;
-  --gold-deep: #8a6424; /* oro leggibile su crema */
-  --silver: #b9bccb; /* arco del logo */
-  --wa: #1f9d55;
+  --paper: #f8f6f1;
+  --stone: #eeebe4;
+  --line: #cfccc4;
+  --ink: #181c28;
+  --muted: #535866;
+  --steel: #8c8e92; /* arco del logo, solo decorativo */
+  --blue: #26407e;
+  --blue-deep: #1b2f60;
+  --ice: #a9bbe9; /* blu leggibile sul fondo scuro */
+  --wa: #1f8a4c;
 }
 
 @theme inline {
-  --color-navy: var(--navy);
-  --color-navy-deep: var(--navy-deep);
-  --color-cream: var(--cream);
-  --color-sand: var(--sand);
+  --color-paper: var(--paper);
+  --color-stone: var(--stone);
+  --color-line: var(--line);
   --color-ink: var(--ink);
-  --color-gold: var(--gold);
-  --color-gold-deep: var(--gold-deep);
-  --color-silver: var(--silver);
+  --color-muted: var(--muted);
+  --color-steel: var(--steel);
+  --color-blue: var(--blue);
+  --color-blue-deep: var(--blue-deep);
+  --color-ice: var(--ice);
   --color-wa: var(--wa);
-  --font-sans: var(--font-manrope);
-  --font-serif: var(--font-cormorant);
+  --font-sans: var(--font-inter);
+  --font-display: var(--font-josefin);
 }
 
 html {
@@ -32,106 +36,115 @@ html {
 }
 
 body {
-  background: var(--cream);
+  background: var(--stone);
   color: var(--ink);
 }
 
 ::selection {
-  background: var(--gold);
-  color: var(--navy-deep);
+  background: var(--blue);
+  color: #fff;
 }
 
-/* Blu notte con una trama leggera di onde */
-.night {
-  background-color: var(--navy);
-  background-image:
-    radial-gradient(ellipse at 20% 0%, rgb(255 255 255 / 0.07), transparent 55%),
-    radial-gradient(ellipse at 90% 100%, rgb(212 174 100 / 0.08), transparent 50%),
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='24'%3E%3Cpath d='M0 12c15 0 15-8 30-8s15 8 30 8 15-8 30-8 15 8 30 8' fill='none' stroke='white' stroke-opacity='.035' stroke-width='1.2'/%3E%3C/svg%3E");
+/* Titoli in stile Art Deco, come le lettere del logo */
+.deco {
+  font-family: var(--font-josefin), sans-serif;
+  font-weight: 300;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.kicker {
+  font-family: var(--font-josefin), sans-serif;
+  font-size: 0.75rem;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
 }
 
 .btn {
-  position: relative;
-  overflow: hidden;
-  isolation: isolate;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 0.6rem;
-  border-radius: 2px;
-  padding: 1rem 2rem;
-  font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 0.16em;
+  padding: 1.05rem 1.75rem 0.9rem;
+  font-family: var(--font-josefin), sans-serif;
+  font-size: 0.8rem;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
-  transition: transform 0.15s, filter 0.15s, background-color 0.2s, color 0.2s;
+  border: 1px solid transparent;
+  transition: background-color 0.2s, color 0.2s, border-color 0.2s;
 }
 @media (max-width: 639px) {
   .btn:not(.btn-compact) {
     width: 100%;
   }
 }
-.btn:hover {
-  transform: translateY(-2px);
-}
 .btn:focus-visible {
-  outline: 2px solid var(--gold);
+  outline: 2px solid var(--blue);
   outline-offset: 3px;
 }
-.btn-gold {
-  background: var(--gold);
-  color: var(--navy-deep);
-}
-.btn-gold:hover {
-  filter: brightness(1.07);
-}
-.btn-navy {
-  background: var(--navy);
+.btn-blue {
+  background: var(--blue);
   color: #fff;
 }
-.btn-navy:hover {
-  background: var(--navy-deep);
+.btn-blue:hover {
+  background: var(--blue-deep);
+}
+.btn-ink {
+  background: var(--ink);
+  color: #fff;
+}
+.btn-ink:hover {
+  background: var(--blue-deep);
 }
 .btn-line {
-  border: 1px solid rgb(255 255 255 / 0.45);
-  color: #fff;
+  border-color: var(--ink);
+  color: var(--ink);
 }
 .btn-line:hover {
-  background: rgb(255 255 255 / 0.1);
+  background: var(--ink);
+  color: #fff;
 }
-.btn-line-dark {
-  border: 1px solid rgb(34 29 87 / 0.35);
-  color: var(--navy);
+.btn-line-light {
+  border-color: rgb(255 255 255 / 0.5);
+  color: #fff;
 }
-.btn-line-dark:hover {
-  background: rgb(34 29 87 / 0.06);
+.btn-line-light:hover {
+  background: #fff;
+  color: var(--ink);
+}
+.btn-light {
+  background: #fff;
+  color: var(--ink);
+}
+.btn-light:hover {
+  background: var(--ice);
 }
 .btn-wa {
   background: var(--wa);
   color: #fff;
 }
 .btn-wa:hover {
-  filter: brightness(1.08);
-}
-.btn::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  background: linear-gradient(110deg, transparent 30%, rgb(255 255 255 / 0.3) 50%, transparent 70%);
-  transform: translateX(-120%);
-  transition: transform 0.8s var(--ease-out-expo);
-}
-.btn:hover::after {
-  transform: translateX(120%);
+  filter: brightness(1.1);
 }
 
-/* Etichetta in maiuscoletto sopra i titoli */
-.kicker {
-  font-size: 0.7rem;
-  font-weight: 700;
-  letter-spacing: 0.28em;
+/* Link con freccia */
+.arrow-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: var(--font-josefin), sans-serif;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
+  transition: gap 0.2s;
+}
+.arrow-link:hover {
+  gap: 0.9rem;
 }
 
 input[type="date"]::-webkit-calendar-picker-indicator {
@@ -186,12 +199,10 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 @media (scripting: enabled) {
   [data-reveal] {
     opacity: 0;
-    transform: translateY(32px);
-    filter: blur(6px);
+    transform: translateY(24px);
     transition:
       opacity 0.9s var(--ease-out-expo),
-      transform 0.9s var(--ease-out-expo),
-      filter 0.9s var(--ease-out-expo);
+      transform 0.9s var(--ease-out-expo);
     transition-delay: calc(var(--d, 0) * 90ms);
   }
   [data-reveal="left"] {
@@ -206,7 +217,6 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   [data-reveal][data-shown] {
     opacity: 1;
     transform: none;
-    filter: none;
   }
 }
 

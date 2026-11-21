@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { delay } from "../components/delay";
-import { BookingSection, GiroCards, MenuGrid } from "../components/sections";
-import { Feature, Heading, PageHero } from "../components/ui";
+import { BookingSection, GiroTable, MenuGrid } from "../components/sections";
+import { Container, Feature, Heading, PageHero } from "../components/ui";
 import { MENU } from "../info";
 import grigliata from "../../public/images/grigliata.jpg";
 import fritto from "../../public/images/fritto.jpg";
@@ -14,10 +14,10 @@ export const metadata: Metadata = {
 };
 
 const STEPS = [
-    { n: "01", t: "Almeno 6 antipasti", d: "Insalata di mare, polpo e patate, pepata di cozze, marinati, gratinati." },
-    { n: "02", t: "2 primi", d: "Paccheri, spaghetti e risotti ai frutti di mare, preparati al momento." },
-    { n: "03", t: "2 secondi", d: "Fritto misto, grigliata e i piatti del giorno secondo il mercato." },
-    { n: "04", t: "Finché non dici basta", d: "Le portate continuano fino allo stop del tavolo." },
+    { t: "Almeno 6 antipasti", d: "Insalata di mare, polpo e patate, pepata di cozze, marinati, gratinati." },
+    { t: "Due primi", d: "Paccheri, spaghetti e risotti ai frutti di mare, preparati al momento." },
+    { t: "Due secondi", d: "Fritto misto, grigliata e i piatti del giorno secondo il mercato." },
+    { t: "Finché non dici basta", d: "Le portate continuano fino allo stop del tavolo." },
 ];
 
 export default function GiroPage() {
@@ -26,32 +26,50 @@ export default function GiroPage() {
         <>
             <PageHero
                 kicker="La specialità della casa"
-                title="Il giro pesce"
+                title={
+                    <>
+                        Il giro
+                        <br />
+                        pesce
+                    </>
+                }
                 text="Portate di pesce a volontà, fino allo stop del tavolo. Minimo 4 persone, da € 40 a persona."
                 image={fritto}
-            />
+                alt="Fritto misto di pesce"
+            >
+                <Link href="/contatti#prenota" className="btn btn-blue">
+                    Prenota il giro pesce
+                </Link>
+            </PageHero>
 
-            <section className="px-6 py-24">
-                <Heading kicker="Come funziona" title="Voi vi sedete, noi portiamo in tavola" />
-                <ol className="mx-auto mt-14 grid max-w-6xl gap-6 sm:grid-cols-2 lg:grid-cols-4">
-                    {STEPS.map((s, i) => (
-                        <li key={s.n} data-reveal style={delay(i)} className="border-t-2 border-navy pt-6">
-                            <span className="font-serif text-5xl font-bold text-gold-deep">{s.n}</span>
-                            <h3 className="mt-3 font-serif text-2xl font-semibold text-navy">{s.t}</h3>
-                            <p className="mt-2 text-sm leading-relaxed text-ink/65">{s.d}</p>
-                        </li>
-                    ))}
-                </ol>
+            <section className="py-24 md:py-28">
+                <Container>
+                    <Heading kicker="Come funziona" title="Voi vi sedete, noi portiamo in tavola" />
+                    <ol className="grid sm:grid-cols-2 lg:grid-cols-4">
+                        {STEPS.map((s, i) => (
+                            <li
+                                key={s.t}
+                                data-reveal
+                                style={delay(i)}
+                                className="border-b border-line py-8 sm:px-6 sm:[&:nth-child(2n)]:border-l lg:border-b-0 lg:[&:not(:first-child)]:border-l lg:first:pl-0"
+                            >
+                                <span className="font-display text-4xl font-light text-steel">0{i + 1}</span>
+                                <h3 className="deco mt-4 text-xl !font-normal tracking-[0.06em]">{s.t}</h3>
+                                <p className="mt-2 text-sm leading-relaxed text-muted">{s.d}</p>
+                            </li>
+                        ))}
+                    </ol>
+                </Container>
             </section>
 
-            <section className="bg-sand/60 px-6 py-24">
-                <Heading kicker="Quattro formule" title="Scegli il tuo giro" text="Tutti i prezzi sono a persona, bevande escluse." />
-                <div className="mt-14">
-                    <GiroCards />
-                </div>
+            <section className="bg-ink py-24 text-white md:py-28">
+                <Container>
+                    <Heading light kicker="Quattro formule" title="Scegli il tuo giro" text="Tutti i prezzi sono a persona, bevande escluse." />
+                    <GiroTable />
+                </Container>
             </section>
 
-            <section className="px-6 py-28">
+            <section className="py-24 md:py-32">
                 <Feature
                     kicker="Per chi vuole il crudo"
                     title="Con il Platinum e il Diamond arriva anche la crudité"
@@ -62,17 +80,13 @@ export default function GiroPage() {
                         Ostriche, scampi, gamberi rossi di Mazara e bis di tartare. Con il Diamond si chiude con i paccheri
                         all&apos;astice.
                     </p>
-                    <Link href="/contatti#prenota" className="btn btn-navy mt-2">
-                        Prenota il giro pesce
-                    </Link>
                 </Feature>
-                <div className="mt-24">
+                <div className="mt-24 px-6">
                     <MenuGrid categories={crudite} single />
                 </div>
             </section>
 
             <BookingSection />
-            <div className="h-6" />
         </>
     );
 }

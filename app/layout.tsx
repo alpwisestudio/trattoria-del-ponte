@@ -1,20 +1,20 @@
 import type { Metadata } from "next";
-import { Cormorant_Garamond, Manrope } from "next/font/google";
+import { Inter, Josefin_Sans } from "next/font/google";
 import { SiteFooter } from "./components/site-footer";
 import { SiteHeader } from "./components/site-header";
 import { RevealObserver } from "./components/motion";
 import "./globals.css";
 
-const manrope = Manrope({
-    variable: "--font-manrope",
+const inter = Inter({
+    variable: "--font-inter",
     subsets: ["latin"],
 });
 
-const cormorant = Cormorant_Garamond({
-    variable: "--font-cormorant",
+// Geometrica e Art Deco, vicina al lettering del logo
+const josefin = Josefin_Sans({
+    variable: "--font-josefin",
     subsets: ["latin"],
-    weight: ["500", "600", "700"],
-    style: ["normal", "italic"],
+    weight: ["300", "400", "600"],
 });
 
 export const metadata: Metadata = {
@@ -30,7 +30,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
     return (
-        <html lang="it" data-scroll-behavior="smooth" className={`${manrope.variable} ${cormorant.variable} h-full antialiased`}>
+        <html lang="it" data-scroll-behavior="smooth" className={`${inter.variable} ${josefin.variable} h-full antialiased`}>
             <body className="flex min-h-full flex-col font-sans">
                 <SiteHeader />
                 <main className="flex-1 overflow-x-clip">{children}</main>

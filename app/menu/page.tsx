@@ -16,14 +16,21 @@ export default function MenuPage() {
         <>
             <PageHero
                 kicker="Il menù"
-                title="Dal mercato alla tavola"
-                text="Tocca una categoria per vedere solo quella. Prezzi aggiornati al menù 2026."
+                title={
+                    <>
+                        Dal mercato
+                        <br />
+                        alla tavola
+                    </>
+                }
+                text="Tocca una categoria per vedere solo quella, o più di una insieme. Prezzi del menù 2026."
                 image={scoglio}
+                alt="Spaghetti allo scoglio"
             />
             <Suspense fallback={<MenuFilterFallback />}>
                 <MenuFilter />
             </Suspense>
-            <p className="mx-auto max-w-xl px-6 text-center text-xs leading-relaxed text-ink/55">
+            <p className="mx-auto max-w-xl px-6 pb-20 text-center text-xs leading-relaxed text-muted">
                 Il pesce è acquistato fresco ogni giorno secondo il mercato. Tonno, salmone, orata e branzino sono abbattuti a
                 norma di legge; alcuni prodotti, come gamberi, polpo e seppie, possono essere surgelati. Per allergie e
                 intolleranze chiedi la tabella degli allergeni al personale. Coperto € 2,50.

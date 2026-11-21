@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>B · Blu Sempione</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;1,6..96,400&family=Manrope:wght@400;500;700&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --night: #0d1624;
+    --deep: #132036;
+    --tile: #1a2a45;
+    --silver: #c9ccd2;
+    --steel: #8c8e92;
+    --ice: #a8cbe8; /* azzurro ghiaccio per le azioni */
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--night); color: #fff; font: 16px/1.6 Manrope, sans-serif; }
+  img { display: block; width: 100%; height: 100%; object-fit: cover; }
+  .wrap { max-width: 1240px; margin: 0 auto; padding: 0 24px; }
+  .serif { font-family: "Bodoni Moda", serif; }
+  .kicker { font: 700 11px/1 Manrope; letter-spacing: .32em; text-transform: uppercase; color: var(--ice); }
+  .btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; padding: 17px 30px; border-radius: 999px; font: 700 13px/1 Manrope; letter-spacing: .06em; text-decoration: none; }
+  .btn-ice { background: var(--ice); color: var(--night); }
+  .btn-line { border: 1px solid rgba(255,255,255,.35); color: #fff; }
+
+  header .wrap { display: flex; align-items: center; justify-content: space-between; height: 92px; }
+  header img { height: 50px; width: auto; }
+  nav { display: flex; gap: 6px; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.1); border-radius: 999px; padding: 6px; }
+  nav a { padding: 9px 18px; border-radius: 999px; font-size: 14px; color: var(--silver); text-decoration: none; }
+  nav a.on { background: #fff; color: var(--night); font-weight: 700; }
+  .burger { display: none; width: 46px; height: 46px; border-radius: 999px; border: 1px solid rgba(255,255,255,.3); }
+
+  .hero .wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; min-height: 640px; padding: 32px 24px 72px; }
+  .hero h1 { font: 400 84px/.98 "Bodoni Moda"; letter-spacing: -.02em; margin-top: 22px; }
+  .hero h1 i { color: var(--ice); }
+  .hero p { margin-top: 26px; max-width: 430px; color: rgba(255,255,255,.7); font-size: 17px; }
+  .ctas { display: flex; gap: 12px; margin-top: 36px; }
+  .rating { display: flex; gap: 28px; margin-top: 48px; padding-top: 28px; border-top: 1px solid rgba(255,255,255,.12); }
+  .rating b { display: block; font: 400 32px/1 "Bodoni Moda"; }
+  .rating span { font-size: 13px; color: var(--steel); }
+  .mosaic { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 220px 220px 160px; gap: 14px; }
+  .mosaic div { border-radius: 18px; overflow: hidden; }
+  .mosaic .a { grid-row: 1 / 3; }
+  .mosaic .b { grid-row: 1 / 2; margin-top: 48px; }
+  .mosaic .c { grid-row: 2 / 4; }
+  .mosaic .d { grid-row: 3 / 4; background: var(--ice); color: var(--night); padding: 22px; display: flex; flex-direction: column; justify-content: space-between; }
+  .mosaic .d b { font: 400 40px/1 "Bodoni Moda"; }
+
+  section.block { padding: 110px 0; }
+  .deep { background: var(--deep); }
+  .center { text-align: center; max-width: 640px; margin: 0 auto 56px; }
+  .center h2 { font: 400 54px/1.05 "Bodoni Moda"; margin-top: 16px; }
+  .center p { color: rgba(255,255,255,.65); margin-top: 16px; }
+
+  .kitchens { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .k { position: relative; height: 460px; border-radius: 22px; overflow: hidden; }
+  .k::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to top, rgba(13,22,36,.92), rgba(13,22,36,0) 60%); }
+  .k .txt { position: absolute; left: 28px; right: 28px; bottom: 28px; z-index: 1; }
+  .k h3 { font: 400 36px/1 "Bodoni Moda"; }
+  .k p { margin-top: 10px; color: rgba(255,255,255,.75); font-size: 14px; }
+  .k .tag { position: absolute; top: 20px; left: 20px; z-index: 1; background: rgba(255,255,255,.9); color: var(--night); font-size: 12px; font-weight: 700; padding: 7px 14px; border-radius: 999px; }
+
+  .pillars { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; align-items: end; }
+  .p { background: var(--tile); border: 1px solid rgba(255,255,255,.08); border-radius: 20px; padding: 28px; }
+  .p:nth-child(1) { min-height: 300px; } .p:nth-child(2) { min-height: 340px; } .p:nth-child(3) { min-height: 380px; } .p:nth-child(4) { min-height: 420px; }
+  .p.hi { background: var(--ice); color: var(--night); }
+  .p .name { font-size: 13px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; opacity: .8; }
+  .p .price { font: 400 64px/1 "Bodoni Moda"; margin: 18px 0; }
+  .p .desc { font-size: 14px; opacity: .75; }
+  .p .badge { display: inline-block; margin-bottom: 14px; font-size: 11px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; background: var(--night); color: var(--ice); border-radius: 999px; padding: 6px 12px; }
+
+  .book { display: grid; grid-template-columns: .9fr 1.1fr; gap: 56px; align-items: center; }
+  .book h2 { font: 400 56px/1.02 "Bodoni Moda"; margin-top: 16px; }
+  .book p { color: rgba(255,255,255,.65); margin-top: 18px; }
+  .card { background: #fff; color: var(--night); border-radius: 24px; padding: 40px; }
+  .row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px; }
+  .in { background: #eef1f6; border-radius: 12px; padding: 14px 16px; font-size: 14px; color: #5a6172; }
+  .in b { display: block; color: var(--night); font-weight: 700; margin-top: 2px; }
+  .card .btn { width: 100%; background: #1f9d55; color: #fff; margin-top: 10px; }
+
+  @media (max-width: 760px) {
+    nav, header .btn { display: none; }
+    .burger { display: block; }
+    header .wrap { height: 72px; } header img { height: 38px; }
+    .hero .wrap { grid-template-columns: 1fr; min-height: 0; gap: 40px; padding-top: 24px; }
+    .hero h1 { font-size: 50px; }
+    .ctas { flex-direction: column; }
+    .mosaic { grid-template-rows: 150px 150px 120px; gap: 10px; }
+    .mosaic .b { margin-top: 28px; }
+    .mosaic .d b { font-size: 28px; }
+    section.block { padding: 72px 0; }
+    .center h2 { font-size: 38px; }
+    .kitchens { grid-template-columns: 1fr; }
+    .k { height: 300px; }
+    .pillars { grid-template-columns: 1fr 1fr; }
+    .p { min-height: 0 !important; padding: 20px; }
+    .p .price { font-size: 44px; }
+    .book { grid-template-columns: 1fr; }
+    .book h2 { font-size: 40px; }
+    .card { padding: 24px; }
+  }
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <img src="../public/images/logo-light.png" alt="Trattoria del Ponte" />
+    <nav><a class="on" href="#">Home</a><a href="#">Menù</a><a href="#">Giro pesce</a><a href="#">Eventi</a><a href="#">Contatti</a></nav>
+    <a class="btn btn-ice" href="#">Prenota</a>
+    <span class="burger"></span>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <div>
+      <p class="kicker">Trattoria · Pizzeria · Gallarate</p>
+      <h1>Il mare,<br /><i>a due passi</i><br />dal Sempione</h1>
+      <p>Pesce fresco ogni giorno, carne alla griglia e pizza nel forno a legna. Aperti tutti i giorni, a pranzo e a cena.</p>
+      <div class="ctas"><a class="btn btn-ice" href="#">Prenota un tavolo</a><a class="btn btn-line" href="#">Guarda il menù</a></div>
+      <div class="rating"><div><b>7/7</b><span>Pranzo e cena</span></div><div><b>50</b><span>Posti in sala eventi</span></div><div><b>1</b><span>Forno a legna</span></div></div>
+    </div>
+    <div class="mosaic">
+      <div class="a"><img src="../public/images/scoglio.jpg" alt="" /></div>
+      <div class="b"><img src="../public/images/pizza.jpg" alt="" /></div>
+      <div class="c"><img src="../public/images/grigliata.jpg" alt="" /></div>
+      <div class="d"><span style="font-size:12px;font-weight:700;letter-spacing:.2em;text-transform:uppercase">Giro pesce</span><b>da € 40</b></div>
+    </div>
+  </div>
+</section>
+
+<section class="block deep">
+  <div class="wrap">
+    <div class="center"><p class="kicker">La cucina</p><h2>Mare, terra e forno a legna</h2><p>Il pesce arriva fresco ogni mattina. Accanto, i classici di carne e una pizzeria vera.</p></div>
+    <div class="kitchens">
+      <div class="k"><span class="tag">32 piatti</span><img src="../public/images/fritto.jpg" alt="" /><div class="txt"><h3>Il mare</h3><p>Crudité, paccheri allo scoglio, grigliate e fritto misto.</p></div></div>
+      <div class="k"><span class="tag">14 piatti</span><img src="../public/images/tagliata.jpg" alt="" /><div class="txt"><h3>La terra</h3><p>Gnocco fritto e salumi, carbonara, costata e cotoletta.</p></div></div>
+      <div class="k"><span class="tag">30 pizze</span><img src="../public/images/margherita.jpg" alt="" /><div class="txt"><h3>La pizzeria</h3><p>Bassa e croccante, anche a lievitazione naturale.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="block">
+  <div class="wrap">
+    <div class="center"><p class="kicker">La specialità della casa</p><h2>Il giro pesce</h2><p>Portate a volontà fino allo stop del tavolo. Minimo 4 persone.</p></div>
+    <div class="pillars">
+      <div class="p"><div class="name">Basic</div><div class="price">€ 40</div><div class="desc">6 antipasti, 2 primi e 2 secondi di pesce.</div></div>
+      <div class="p"><div class="name">Gold</div><div class="price">€ 45</div><div class="desc">Il Basic più un primo a scelta tra le specialità.</div></div>
+      <div class="p hi"><span class="badge">Il più scelto</span><div class="name">Platinum</div><div class="price">€ 50</div><div class="desc">Il Basic più una crudité di pesce.</div></div>
+      <div class="p"><div class="name">Diamond</div><div class="price">€ 60</div><div class="desc">Crudité di pesce e paccheri all'astice.</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="block deep">
+  <div class="wrap book">
+    <div><p class="kicker">Prenotazioni</p><h2>Prenota il tuo tavolo</h2><p>Scegli giorno, servizio e persone: la richiesta ci arriva su WhatsApp e ti confermiamo il tavolo in pochi minuti.</p></div>
+    <div class="card">
+      <div class="row"><div class="in">Nome<b>Mario Rossi</b></div><div class="in">Data<b>Sab 12 dicembre</b></div></div>
+      <div class="row"><div class="in">Servizio<b>Cena · 20:30</b></div><div class="in">Persone<b>4</b></div></div>
+      <a class="btn" href="#">Invia su WhatsApp</a>
+    </div>
+  </div>
+</section>
+</body>
+</html>

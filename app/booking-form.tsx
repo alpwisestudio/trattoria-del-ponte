@@ -7,13 +7,13 @@ const LUNCH = ["12:00", "12:30", "13:00", "13:30", "14:00"];
 const DINNER = ["19:00", "19:30", "20:00", "20:30", "21:00", "21:30", "22:00", "22:30"];
 
 const field =
-    "mt-1.5 w-full rounded-[2px] border border-ink/20 bg-white px-3.5 py-3 text-sm outline-none transition placeholder:text-ink/40 focus:border-navy focus:ring-2 focus:ring-navy/15";
+    "mt-2 w-full border border-ink/25 bg-white px-3.5 py-3 text-sm outline-none transition placeholder:text-muted/70 focus:border-blue focus:ring-2 focus:ring-blue/20";
 
 function Label({ children, required }: { children: React.ReactNode; required?: boolean }) {
     return (
-        <span className="text-xs font-bold text-ink/75">
+        <span className="kicker block !tracking-[0.2em] text-ink">
             {children}
-            {required && <span className="text-gold-deep"> *</span>}
+            {required && <span className="text-blue"> *</span>}
         </span>
     );
 }
@@ -29,9 +29,9 @@ function formatDate(iso: FormDataEntryValue | null) {
 }
 
 const SubmitNote = () => (
-    <p className="text-xs text-ink/55">
+    <p className="text-xs text-muted">
         La richiesta arriva su WhatsApp. Oppure chiama il{" "}
-        <a href={INFO.phoneHref} className="font-bold text-navy underline underline-offset-2">
+        <a href={INFO.phoneHref} className="font-semibold text-ink underline underline-offset-2">
             {INFO.phone}
         </a>
     </p>
@@ -71,15 +71,15 @@ export function BookingForm() {
                 <input name="date" type="date" required className={field} />
             </label>
             <fieldset>
-                <legend className="text-xs font-bold text-ink/75">
-                    Servizio<span className="text-gold-deep"> *</span>
+                <legend className="kicker float-left w-full pb-2 !tracking-[0.2em] text-ink">
+                    Servizio<span className="text-blue"> *</span>
                 </legend>
-                <div className="mt-1.5 grid grid-cols-2 border border-ink/20">
+                <div className="clear-both grid grid-cols-2 border border-ink/25">
                     {(["pranzo", "cena"] as const).map((s) => (
                         <label
                             key={s}
-                            className={`cursor-pointer py-3 text-center text-sm font-bold capitalize transition-colors has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-navy/30 ${
-                                service === s ? "bg-navy text-white" : "bg-white text-ink/70 hover:bg-sand/50"
+                            className={`cursor-pointer py-3 text-center text-sm font-bold capitalize transition-colors has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-blue/30 ${
+                                service === s ? "bg-ink text-white" : "bg-white text-muted hover:bg-stone"
                             }`}
                         >
                             <input
@@ -115,10 +115,10 @@ export function BookingForm() {
                     <option>Più di 14</option>
                 </select>
             </label>
-            <label className="flex items-start gap-3 rounded-[2px] border border-gold/60 bg-gold/10 p-3.5 sm:col-span-2">
-                <input name="giro" type="checkbox" className="mt-0.5 h-4 w-4 accent-navy" />
-                <span className="text-sm text-ink/80">
-                    <strong className="text-navy">Vogliamo il giro pesce</strong>, portate a volontà da € 40 a persona (minimo
+            <label className="flex items-start gap-3 border border-blue/30 bg-blue/[0.05] p-4 sm:col-span-2">
+                <input name="giro" type="checkbox" className="mt-0.5 h-4 w-4 accent-blue" />
+                <span className="text-sm text-muted">
+                    <strong className="font-semibold text-ink">Vogliamo il giro pesce</strong>, portate a volontà da € 40 a persona (minimo
                     4 persone)
                 </span>
             </label>
